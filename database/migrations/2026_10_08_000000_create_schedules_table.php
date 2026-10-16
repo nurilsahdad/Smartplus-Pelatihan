@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('schedules', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('program_id')->constrained('programs')->onDelete('cascade');
+            $table->string('title');
+            $table->date('date');
+            $table->time('start_time');
+            $table->time('end_time');
+            $table->string('location')->default('Online (Google Meet / Zoom)');
+            $table->string('speaker')->nullable();
+            $table->text('description')->nullable();
+            $table->enum('status', ['mendatang', 'berlangsung', 'selesai'])->default('mendatang');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('schedules');
+    }
+};
