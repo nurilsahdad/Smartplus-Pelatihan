@@ -12,6 +12,7 @@ use App\Http\Controllers\AdminSyllabusController;
 use App\Http\Controllers\AdminScheduleController;
 use App\Http\Controllers\AdminCertificateController;
 use App\Http\Controllers\AdminArticleController;
+use App\Http\Controllers\AdminSettingController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\ArticleController;
 use App\Models\Article;
@@ -83,6 +84,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('certificates', AdminCertificateController::class);
     Route::post('/certificates/{certificate}/toggle-status', [AdminCertificateController::class, 'toggleStatus'])->name('certificates.toggle-status');
     Route::resource('articles', AdminArticleController::class);
+    Route::get('/settings', [AdminSettingController::class, 'index'])->name('settings.index');
+    Route::post('/settings', [AdminSettingController::class, 'update'])->name('settings.update');
 });
 
 

@@ -8,7 +8,7 @@
                     CV.SMARTPLUS INDONESIA
                 </h3>
                 <p class="text-slate-400 text-xs leading-relaxed max-w-sm">
-                    GRAND CIKARANG CITY BLOK G12 NO.4 BEKASI-INDONESIA
+                   CENTRAL PARK CIKARANG, JL. BOULEVARD RAYA BLOK C5, KARANGRAHARJA, KEC. CIKARANG UTARA, KABUPATEN BEKASI
                 </p>
                 <div class="flex space-x-3 pt-2">
                     <a href="#" class="w-8 h-8 rounded-full bg-slate-700/80 flex items-center justify-center text-slate-300 hover:bg-slate-600 hover:text-white transition-colors">
