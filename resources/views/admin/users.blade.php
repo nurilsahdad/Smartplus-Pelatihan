@@ -41,7 +41,7 @@
             <table class="w-full text-left text-xs text-slate-600">
                 <thead class="bg-slate-50 text-slate-500 uppercase text-[10px] tracking-wider border-b border-slate-100">
                     <tr>
-                        <th class="py-3.5 px-4 font-bold"># ID</th>
+                        <th class="py-3.5 px-4 font-bold">No</th>
                         <th class="py-3.5 px-4 font-bold">Peserta</th>
                         <th class="py-3.5 px-4 font-bold">Kontak & Gender</th>
                         <th class="py-3.5 px-4 font-bold">Role & Verifikasi</th>
@@ -52,7 +52,7 @@
                 <tbody class="divide-y divide-slate-100">
                     @forelse($users as $userItem)
                         <tr class="hover:bg-slate-50/60 transition-colors">
-                            <td class="py-4 px-4 font-mono text-slate-400 font-semibold">#{{ $userItem->id }}</td>
+                            <td class="py-4 px-4 font-semibold text-slate-500">{{ $loop->iteration }}</td>
                             <td class="py-4 px-4">
                                 <div class="flex items-center gap-3">
                                     <div class="w-9 h-9 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center font-bold text-slate-600 text-xs shrink-0 overflow-hidden">

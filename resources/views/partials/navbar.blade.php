@@ -29,6 +29,7 @@
                 </div>
             </div>
 
+            <a href="{{ url('/#artikel') }}" class="text-white/90 font-medium hover:text-white transition-colors">Artikel</a>
             <a href="{{ url('/#contact') }}" class="text-white/90 font-medium hover:text-white transition-colors">Contact</a>
         </div>
 
@@ -147,6 +148,10 @@
                     </a>
                 </div>
             </div>
+
+            <a href="{{ url('/#artikel') }}" class="block px-3 py-2.5 rounded-xl text-white/90 hover:text-white font-medium hover:bg-white/10 transition-colors">
+                Artikel
+            </a>
 
             <a href="{{ url('/#contact') }}" class="block px-3 py-2.5 rounded-xl text-white/90 hover:text-white font-medium hover:bg-white/10 transition-colors">
                 Contact

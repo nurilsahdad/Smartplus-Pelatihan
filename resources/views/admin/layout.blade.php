@@ -143,6 +143,19 @@
                     </a>
                 </div>
 
+                <!-- MANAJEMEN KONTEN -->
+                <div class="space-y-1 shrink-0 md:pt-2 md:border-t border-slate-100">
+                    <div class="px-3 py-1 text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Manajemen Konten</div>
+
+                    <!-- Artikel -->
+                    <a href="{{ route('admin.articles.index') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-bold text-xs transition-all {{ request()->routeIs('admin.articles*') ? 'bg-[#e8f7ec] text-[#3cb759] border border-emerald-200 shadow-xs' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50' }}">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+                        </svg>
+                        Artikel & Blog
+                    </a>
+                </div>
+
             </div>
         </aside>
 

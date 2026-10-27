@@ -66,3 +66,6 @@
         </div>
     </div>
 </footer>
+
+@include('partials.enroll-modal')
+

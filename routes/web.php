@@ -11,14 +11,25 @@ use App\Http\Controllers\AdminProgramController;
 use App\Http\Controllers\AdminSyllabusController;
 use App\Http\Controllers\AdminScheduleController;
 use App\Http\Controllers\AdminCertificateController;
+use App\Http\Controllers\AdminArticleController;
 use App\Http\Controllers\CertificateController;
+use App\Http\Controllers\ArticleController;
+use App\Models\Article;
 
 Route::get('/', function () {
     if (auth()->check() && auth()->user()->role === 'admin') {
         return redirect()->route('admin.dashboard');
     }
-    return view('home');
+    $articles = Article::where('status', 'Published')->latest()->take(6)->get();
+    return view('home', compact('articles'));
 });
+
+Route::get('/artikel', function () {
+    return redirect('/#artikel');
+})->name('articles.index');
+Route::get('/artikel/{slug}', function () {
+    return redirect('/#artikel');
+})->name('articles.show');
 
 Route::get('/program/agentik-ai', [ProgramController::class, 'detailAgentikAi'])->name('program.agentik-ai');
 Route::get('/program/iot-esp32', [ProgramController::class, 'detailIot'])->name('program.iot-esp32');
@@ -71,6 +82,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('schedules', AdminScheduleController::class)->only(['index', 'store', 'update', 'destroy']);
     Route::resource('certificates', AdminCertificateController::class);
     Route::post('/certificates/{certificate}/toggle-status', [AdminCertificateController::class, 'toggleStatus'])->name('certificates.toggle-status');
+    Route::resource('articles', AdminArticleController::class);
 });
 
 

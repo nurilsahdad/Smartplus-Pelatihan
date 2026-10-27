@@ -60,13 +60,28 @@ class ProgramController extends Controller
 
         $user = Auth::user();
 
-        // Check if already enrolled
+        // Validasi: Akun administrator tidak dapat mendaftar
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.dashboard')->with('error', 'Akun Administrator tidak dapat mendaftar sebagai peserta pelatihan.');
+        }
+
+        // Validasi duplikasi pendaftaran
+        $slugAliases = [
+            'agentik-ai' => ['agentik-ai', 'agentik-ai-n8n'],
+            'iot-esp32' => ['iot-esp32', 'iot-prototype-esp32'],
+            'industrial-iot' => ['industrial-iot', 'iiot-industrial-internet-of-things'],
+        ];
+        $checkSlugs = $slugAliases[$slug] ?? [$slug];
+
         $existing = Enrollment::where('user_id', $user->id)
-            ->where('program_slug', $slug)
+            ->where(function ($query) use ($checkSlugs, $program) {
+                $query->whereIn('program_slug', $checkSlugs)
+                      ->orWhere('program_name', $program['name']);
+            })
             ->first();
 
         if ($existing) {
-            return redirect()->route('dashboard')->with('info', 'Anda telah terdaftar pada program pelatihan ' . $program['name'] . '.');
+            return redirect()->route('dashboard')->with('warning', 'Anda sudah terdaftar pada program pelatihan ' . $program['name'] . ' sebelumnya.');
         }
 
         // Create enrollment
@@ -87,8 +102,19 @@ class ProgramController extends Controller
         $slug = session('pending_enrollment');
         if ($slug && array_key_exists($slug, self::$programs)) {
             $program = self::$programs[$slug];
+
+            $slugAliases = [
+                'agentik-ai' => ['agentik-ai', 'agentik-ai-n8n'],
+                'iot-esp32' => ['iot-esp32', 'iot-prototype-esp32'],
+                'industrial-iot' => ['industrial-iot', 'iiot-industrial-internet-of-things'],
+            ];
+            $checkSlugs = $slugAliases[$slug] ?? [$slug];
+
             $existing = Enrollment::where('user_id', $userId)
-                ->where('program_slug', $slug)
+                ->where(function ($query) use ($checkSlugs, $program) {
+                    $query->whereIn('program_slug', $checkSlugs)
+                          ->orWhere('program_name', $program['name']);
+                })
                 ->first();
 
             if (!$existing) {

@@ -523,7 +523,7 @@
     </section>
 
     <!-- SECTION 6: ARTIKEL TERBARU -->
-    <section class="py-12 sm:py-16 lg:py-24 bg-slate-50/50 border-t border-slate-100 relative">
+    <section id="artikel" class="py-12 sm:py-16 lg:py-24 bg-slate-50/50 border-t border-slate-100 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <!-- Section Header -->
@@ -536,69 +536,32 @@
                 </p>
             </div>
 
-            <!-- 3 Article Cards Grid -->
+            <!-- Article Cards Grid -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-
-                <!-- Article 1 -->
-                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200/70 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
-                    <div class="h-44 sm:h-48 overflow-hidden bg-slate-100">
-                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80" alt="Blog Post" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
-                    </div>
-                    <div class="p-5 sm:p-6 flex flex-col justify-between flex-1 space-y-4">
-                        <h3 class="text-base font-bold text-slate-900 line-clamp-2">
-                            Penerapan Artificial Intelligence dalam Industri Modern.
-                        </h3>
-                        <div>
-                            <a href="#" class="inline-flex items-center text-[#3cb759] font-semibold text-xs hover:text-[#329d4c] transition-colors group">
-                                Readmore
-                                <svg class="w-3.5 h-3.5 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                                </svg>
-                            </a>
+                @forelse($articles as $article)
+                    <div class="bg-white rounded-2xl overflow-hidden border border-slate-200/70 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
+                        <div class="h-44 sm:h-48 overflow-hidden bg-slate-100">
+                            @if($article->image)
+                                <img src="{{ str_starts_with($article->image, 'http') ? $article->image : asset($article->image) }}" alt="{{ $article->title }}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                            @else
+                                <div class="w-full h-full flex items-center justify-center bg-slate-100 text-slate-400">
+                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+                                    </svg>
+                                </div>
+                            @endif
+                        </div>
+                        <div class="p-5 sm:p-6 flex flex-col justify-between flex-1">
+                            <h3 class="text-base font-bold text-slate-900 line-clamp-2">
+                                {{ $article->title }}
+                            </h3>
                         </div>
                     </div>
-                </div>
-
-                <!-- Article 2 -->
-                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200/70 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
-                    <div class="h-44 sm:h-48 overflow-hidden bg-slate-100">
-                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="Blog Post" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                @empty
+                    <div class="col-span-full py-12 text-center text-slate-400 text-sm">
+                        Belum ada artikel yang dipublikasikan saat ini.
                     </div>
-                    <div class="p-5 sm:p-6 flex flex-col justify-between flex-1 space-y-4">
-                        <h3 class="text-base font-bold text-slate-900 line-clamp-2">
-                            Membangun Prototype IoT Menggunakan Microcontroller ESP32.
-                        </h3>
-                        <div>
-                            <a href="#" class="inline-flex items-center text-[#3cb759] font-semibold text-xs hover:text-[#329d4c] transition-colors group">
-                                Readmore
-                                <svg class="w-3.5 h-3.5 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Article 3 -->
-                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200/70 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
-                    <div class="h-44 sm:h-48 overflow-hidden bg-slate-100">
-                        <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80" alt="Blog Post" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
-                    </div>
-                    <div class="p-5 sm:p-6 flex flex-col justify-between flex-1 space-y-4">
-                        <h3 class="text-base font-bold text-slate-900 line-clamp-2">
-                            Otomasi Workflow Bisnis Berbasis Agentic AI dan N8N.
-                        </h3>
-                        <div>
-                            <a href="#" class="inline-flex items-center text-[#3cb759] font-semibold text-xs hover:text-[#329d4c] transition-colors group">
-                                Readmore
-                                <svg class="w-3.5 h-3.5 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
+                @endforelse
             </div>
 
         </div>
